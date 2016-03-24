@@ -46,15 +46,7 @@ then
   exit 1
 fi
 
-BASE=$(basename "$PWD" | sed 's/[^a-zA-Z0-9\-]//g')
-NAME=$(basename "$FILE" .conf)
-
-if [ "$NAME" = 'tmux' ] || [ "$NAME" = '.tmux' ]
-then
-  SESSION=$BASE
-else
-  SESSION=$BASE/$NAME
-fi
+SESSION=$(basename "$FILE" .conf)
 
 if ! tmux has-session -t "$SESSION" > /dev/null 2>&1
 then
