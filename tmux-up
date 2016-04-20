@@ -53,11 +53,13 @@ then
   TMUX='' tmux new-session -d -s "$SESSION"
   xargs -L1 tmux < "$FILE"
   tmux select-window -t 1
+  tmux detach -t "$SESSION"
+  tmux -CC attach -t "$SESSION"
 fi
 
 if [ -z "$TMUX" ]
 then
-  tmux attach -t "$SESSION"
+  tmux -CC attach -t "$SESSION"
 else
   tmux switch-client -t "$SESSION"
 fi
